@@ -25,6 +25,12 @@ const decrementCounterAction = () => {
   };
 };
 
+const incrementCountebyValue = (value) => {
+  return {
+    type: "incrementbyvalue",
+    payload: value,
+  };
+};
 const addUser = (user) => {
   return {
     type: "addUser",
@@ -39,7 +45,13 @@ const counterReducer = (state = initialConunterState, action) => {
   switch (action.type) {
     case "increment":
       return {
+        ...state,
         count: state.count + 1,
+      };
+    case "incrementbyvalue":
+      return {
+        ...state,
+        count: state.count + action.payload,
       };
     case "decrement":
       return {
@@ -51,13 +63,14 @@ const counterReducer = (state = initialConunterState, action) => {
 };
 
 //create store
-const store = createStore(counterReducer)
-store.subscribe(()=>{
-    console.log(store.getState())
-})
+const store = createStore(counterReducer);
+store.subscribe(() => {
+  console.log(store.getState());
+});
 
 //dispatch actions
-store.dispatch(incrementCounterAction());
-store.dispatch(incrementCounterAction());
-store.dispatch(incrementCounterAction());
-store.dispatch(decrementCounterAction());
+// store.dispatch(incrementCounterAction());
+// store.dispatch(incrementCounterAction());
+// store.dispatch(incrementCounterAction());
+// store.dispatch(decrementCounterAction());
+store.dispatch(incrementCountebyValue(10));
